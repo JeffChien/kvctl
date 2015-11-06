@@ -21,6 +21,7 @@ func main() {
 
 	app.Commands = []cli.Command{
 		cli.Command(command.Cat),
+		cli.Command(command.Touch),
 	}
 	app.Run(os.Args)
 }
