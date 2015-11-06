@@ -7,6 +7,7 @@ import (
 var (
 	Cat   CatCommand
 	Touch TouchCommand
+	Rm    RmCommand
 )
 
 func init() {
@@ -19,5 +20,16 @@ func init() {
 		Name:   "touch",
 		Usage:  "touch a key with value.",
 		Action: Touch.run,
+	}
+	Rm = RmCommand{
+		Name:  "rm",
+		Usage: "remove keys or dirs",
+		Flags: []cli.Flag{
+			cli.BoolFlag{
+				Name:  "recursive,r,R",
+				Usage: "remove directorieds and their content recursively.",
+			},
+		},
+		Action: Rm.run,
 	}
 }
