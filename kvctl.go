@@ -18,5 +18,9 @@ func main() {
 			EnvVar: "KVCTL_BACKEND",
 		},
 	}
+
+	app.Commands = []cli.Command{
+		cli.Command(command.Cat),
+	}
 	app.Run(os.Args)
 }
