@@ -3,7 +3,6 @@ package command
 import (
 	"fmt"
 	"github.com/codegangsta/cli"
-	"github.com/docker/libkv/store"
 	"github.com/jeffchien/kvctl/lib/storage"
 )
 
@@ -25,9 +24,8 @@ func (m *CatCommand) run(c *cli.Context) {
 			continue
 		}
 		pair, err := kv.Get(v)
-		switch err {
-		case store.ErrKeyNotFound:
-			fmt.Println(&ErrorKeyNotFound{v})
+		if err != nil {
+			fmt.Println(PrefixError(v, err))
 			continue
 		}
 		fmt.Println(string(pair.Value))
