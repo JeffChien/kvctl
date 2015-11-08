@@ -23,6 +23,7 @@ func main() {
 		cli.Command(command.Cat),
 		cli.Command(command.Touch),
 		cli.Command(command.Rm),
+		cli.Command(command.Mkdir),
 	}
 	app.Run(os.Args)
 }

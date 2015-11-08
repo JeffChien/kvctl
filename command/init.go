@@ -8,6 +8,7 @@ var (
 	Cat   CatCommand
 	Touch TouchCommand
 	Rm    RmCommand
+	Mkdir MkdirCommand
 )
 
 func init() {
@@ -31,5 +32,16 @@ func init() {
 			},
 		},
 		Action: Rm.run,
+	}
+	Mkdir = MkdirCommand{
+		Name:  "mkdir",
+		Usage: "create directory",
+		Flags: []cli.Flag{
+			cli.BoolFlag{
+				Name:  "parent,p",
+				Usage: "create parent directories if not exist.",
+			},
+		},
+		Action: Mkdir.run,
 	}
 }
