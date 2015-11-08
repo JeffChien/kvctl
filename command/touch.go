@@ -38,7 +38,7 @@ func (m *TouchCommand) run(c *cli.Context) {
 	}
 
 	for _, v := range c.Args() {
-		err := m.put(kv, v, data, nil)
+		err := m.touch(kv, v, data, nil)
 		if err != nil {
 			fmt.Println(PrefixError(v, err))
 			continue
@@ -46,7 +46,10 @@ func (m *TouchCommand) run(c *cli.Context) {
 	}
 }
 
-func (m *TouchCommand) put(kv store.Store, path string, data []byte, opts *store.WriteOptions) error {
+func (m *TouchCommand) touch(kv store.Store, path string, data []byte, opts *store.WriteOptions) error {
+	if path[len(path)-1] == '/' {
+		return fmt.Errorf("got a directory")
+	}
 	normalizePath := filepath.Clean(path)
 	parentDir := filepath.Dir(normalizePath)
 	if !(parentDir == "." || parentDir == "/") {
