@@ -26,19 +26,21 @@ func (m *CatSuite) SetupSuite() {
 
 func (m *CatSuite) SetupTest() {
 	var err error
-	err = m.kv.Put("validKey", []byte("hello world"), nil)
+	err = m.kv.Put("testroot/", nil, &store.WriteOptions{IsDir: true})
+	assert.NoError(m.T(), err)
+	err = m.kv.Put("testroot/validKey", []byte("hello world"), nil)
 	assert.NoError(m.T(), err)
 }
 
 func (m *CatSuite) TearDownTest() {
 	var err error
-	err = m.kv.Delete("validKey")
+	err = m.kv.DeleteTree("testroot/")
 	assert.NoError(m.T(), err)
 }
 
 func (m *CatSuite) TestCatValidKey() {
 	cat := CatCommand{}
-	pair, err := cat.cat(m.kv, "validKey")
+	pair, err := cat.cat(m.kv, "testroot/validKey")
 	assert.NoError(m.T(), err)
 	assert.NotNil(m.T(), pair)
 	assert.Equal(m.T(), string(pair.Value), "hello world")
@@ -46,14 +48,14 @@ func (m *CatSuite) TestCatValidKey() {
 
 func (m *CatSuite) TestCatInvalidKey() {
 	cat := CatCommand{}
-	pair, err := cat.cat(m.kv, "inValidKey")
+	pair, err := cat.cat(m.kv, "testroot/inValidKey")
 	assert.Error(m.T(), err)
 	assert.Nil(m.T(), pair)
 }
 
 func (m *CatSuite) TestCatDirectory() {
 	cat := CatCommand{}
-	pair, err := cat.cat(m.kv, "invalidDir/")
+	pair, err := cat.cat(m.kv, "testroot/invalidDir/")
 	assert.Error(m.T(), err)
 	assert.Nil(m.T(), pair)
 }
