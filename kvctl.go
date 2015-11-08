@@ -24,6 +24,7 @@ func main() {
 		cli.Command(command.Touch),
 		cli.Command(command.Rm),
 		cli.Command(command.Mkdir),
+		cli.Command(command.Ls),
 	}
 	app.Run(os.Args)
 }

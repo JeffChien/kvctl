@@ -9,6 +9,7 @@ var (
 	Touch TouchCommand
 	Rm    RmCommand
 	Mkdir MkdirCommand
+	Ls    LsCommand
 )
 
 func init() {
@@ -43,5 +44,10 @@ func init() {
 			},
 		},
 		Action: Mkdir.run,
+	}
+	Ls = LsCommand{
+		Name:   "ls",
+		Usage:  "recursive list item in given path",
+		Action: Ls.run,
 	}
 }
