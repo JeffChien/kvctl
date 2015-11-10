@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/codegangsta/cli"
-	"github.com/jeffchien/kvctl/command"
+	"github.com/JeffChien/kvctl/command"
 	"os"
 )
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/codegangsta/cli"
 	"github.com/docker/libkv/store"
-	"github.com/jeffchien/kvctl/lib/storage"
+	"github.com/JeffChien/kvctl/lib/storage"
 	"golang.org/x/crypto/ssh/terminal"
 	"io/ioutil"
 	"os"

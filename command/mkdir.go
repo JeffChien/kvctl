@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/codegangsta/cli"
 	"github.com/docker/libkv/store"
-	"github.com/jeffchien/kvctl/lib/storage"
-	"github.com/jeffchien/kvctl/util"
+	"github.com/JeffChien/kvctl/lib/storage"
+	"github.com/JeffChien/kvctl/util"
 	"path/filepath"
 	"time"
 )

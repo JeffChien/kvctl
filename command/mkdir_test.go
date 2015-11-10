@@ -2,7 +2,7 @@ package command
 
 import (
 	"github.com/docker/libkv/store"
-	"github.com/jeffchien/kvctl/lib/storage"
+	"github.com/JeffChien/kvctl/lib/storage"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"os"
