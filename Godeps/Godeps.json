@@ -1,0 +1,67 @@
+{
+	"ImportPath": "github.com/JeffChien/kvctl",
+	"GoVersion": "go1.5.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/boltdb/bolt",
+			"Comment": "v1.1.0-12-g47d80ed",
+			"Rev": "47d80ed8a451fe9c07069e845e93b79291bb0532"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/cli",
+			"Comment": "1.2.0-163-g70e3fa5",
+			"Rev": "70e3fa51ebed95df8c0fbe1519c1c1f9bc16bb13"
+		},
+		{
+			"ImportPath": "github.com/coreos/etcd/Godeps/_workspace/src/github.com/ugorji/go/codec",
+			"Comment": "v2.2.0-363-gf48e95f",
+			"Rev": "f48e95f7b0ac445e29e5207d466c1ff07322bb59"
+		},
+		{
+			"ImportPath": "github.com/coreos/etcd/Godeps/_workspace/src/golang.org/x/net/context",
+			"Comment": "v2.2.0-363-gf48e95f",
+			"Rev": "f48e95f7b0ac445e29e5207d466c1ff07322bb59"
+		},
+		{
+			"ImportPath": "github.com/coreos/etcd/client",
+			"Comment": "v2.2.0-363-gf48e95f",
+			"Rev": "f48e95f7b0ac445e29e5207d466c1ff07322bb59"
+		},
+		{
+			"ImportPath": "github.com/coreos/etcd/pkg/pathutil",
+			"Comment": "v2.2.0-363-gf48e95f",
+			"Rev": "f48e95f7b0ac445e29e5207d466c1ff07322bb59"
+		},
+		{
+			"ImportPath": "github.com/coreos/etcd/pkg/types",
+			"Comment": "v2.2.0-363-gf48e95f",
+			"Rev": "f48e95f7b0ac445e29e5207d466c1ff07322bb59"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/consul/api",
+			"Comment": "v0.6.0-rc1-4-gcf1b9fe",
+			"Rev": "cf1b9fe0741e373125e23c10af233a7f67427a68"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/go-cleanhttp",
+			"Rev": "5df5ddc69534f1a4697289f1dca2193fbb40213f"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/serf/coordinate",
+			"Comment": "v0.6.4-144-ge53c5ef",
+			"Rev": "e53c5ef9c9b74fdb39baf2906a0fb9d7635bde46"
+		},
+		{
+			"ImportPath": "github.com/samuel/go-zookeeper/zk",
+			"Rev": "218e9c81c0dd8b3b18172b2bbfad92cc7d6db55f"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/ssh/terminal",
+			"Rev": "575fdbe86e5dd89229707ebec0575ce7d088a4a6"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "b4e17d61b15679caf2335da776c614169a1b4643"
+		}
+	]
+}
