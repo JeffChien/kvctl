@@ -1,8 +1,8 @@
 package command
 
 import (
-	"github.com/docker/libkv/store"
 	"github.com/JeffChien/kvctl/lib/storage"
+	"github.com/docker/libkv/store"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"os"
@@ -44,13 +44,13 @@ func (m *LsSuite) TestListDirectory() {
 	var err error
 	var paths []string
 	ls := LsCommand{}
-	pairs, err := ls.ls(m.kv, "")
+	pairs, err := ls.ls(m.kv, "testroot")
 	for _, v := range pairs {
 		paths = append(paths, string(v.Key))
 	}
 	assert.NoError(m.T(), err)
 	assert.NotNil(m.T(), pairs)
-	assert.EqualValues(m.T(), []string{"testroot/", "testroot/a", "testroot/b", "testroot/c/"}, paths)
+	assert.EqualValues(m.T(), []string{"a", "b", "c/"}, paths)
 }
 
 func TestRunLsSuite(t *testing.T) {
