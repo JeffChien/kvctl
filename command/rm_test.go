@@ -1,8 +1,8 @@
 package command
 
 import (
-	"github.com/docker/libkv/store"
 	"github.com/JeffChien/kvctl/lib/storage"
+	"github.com/docker/libkv/store"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"os"
@@ -58,6 +58,15 @@ func (m *RmSuite) TestRmDirWithRecursive() {
 	var err error
 	rm := RmCommand{}
 	err = rm.rm(m.kv, "testroot/adir/", true)
+	assert.NoError(m.T(), err)
+}
+
+func (m *RmSuite) TestRmRootRecursive() {
+	var err error
+	rm := RmCommand{}
+	err = rm.rm(m.kv, "", true)
+	assert.NoError(m.T(), err)
+	m.kv.Put("testroot/", nil, &store.WriteOptions{IsDir: true})
 	assert.NoError(m.T(), err)
 }
 
