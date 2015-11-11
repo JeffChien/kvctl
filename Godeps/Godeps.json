@@ -1,11 +1,14 @@
 {
 	"ImportPath": "github.com/JeffChien/kvctl",
 	"GoVersion": "go1.5.1",
+	"Packages": [
+		"./..."
+	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/boltdb/bolt",
-			"Comment": "v1.1.0-12-g47d80ed",
-			"Rev": "47d80ed8a451fe9c07069e845e93b79291bb0532"
+			"Comment": "v1.1.0-17-gd359c78",
+			"Rev": "d359c78f40cc01fa12b65c3d30210dc9c529dd87"
 		},
 		{
 			"ImportPath": "github.com/codegangsta/cli",
@@ -14,33 +17,37 @@
 		},
 		{
 			"ImportPath": "github.com/coreos/etcd/Godeps/_workspace/src/github.com/ugorji/go/codec",
-			"Comment": "v2.2.0-363-gf48e95f",
-			"Rev": "f48e95f7b0ac445e29e5207d466c1ff07322bb59"
+			"Comment": "v2.3.0-alpha.0-30-g2d11e74",
+			"Rev": "2d11e7464ea435fcc0de9277b6f20bdd83e23124"
 		},
 		{
 			"ImportPath": "github.com/coreos/etcd/Godeps/_workspace/src/golang.org/x/net/context",
-			"Comment": "v2.2.0-363-gf48e95f",
-			"Rev": "f48e95f7b0ac445e29e5207d466c1ff07322bb59"
+			"Comment": "v2.3.0-alpha.0-30-g2d11e74",
+			"Rev": "2d11e7464ea435fcc0de9277b6f20bdd83e23124"
 		},
 		{
 			"ImportPath": "github.com/coreos/etcd/client",
-			"Comment": "v2.2.0-363-gf48e95f",
-			"Rev": "f48e95f7b0ac445e29e5207d466c1ff07322bb59"
+			"Comment": "v2.3.0-alpha.0-30-g2d11e74",
+			"Rev": "2d11e7464ea435fcc0de9277b6f20bdd83e23124"
 		},
 		{
 			"ImportPath": "github.com/coreos/etcd/pkg/pathutil",
-			"Comment": "v2.2.0-363-gf48e95f",
-			"Rev": "f48e95f7b0ac445e29e5207d466c1ff07322bb59"
+			"Comment": "v2.3.0-alpha.0-30-g2d11e74",
+			"Rev": "2d11e7464ea435fcc0de9277b6f20bdd83e23124"
 		},
 		{
 			"ImportPath": "github.com/coreos/etcd/pkg/types",
-			"Comment": "v2.2.0-363-gf48e95f",
-			"Rev": "f48e95f7b0ac445e29e5207d466c1ff07322bb59"
+			"Comment": "v2.3.0-alpha.0-30-g2d11e74",
+			"Rev": "2d11e7464ea435fcc0de9277b6f20bdd83e23124"
+		},
+		{
+			"ImportPath": "github.com/davecgh/go-spew/spew",
+			"Rev": "5215b55f46b2b919f50a1df0eaa5886afe4e3b3d"
 		},
 		{
 			"ImportPath": "github.com/hashicorp/consul/api",
-			"Comment": "v0.6.0-rc1-4-gcf1b9fe",
-			"Rev": "cf1b9fe0741e373125e23c10af233a7f67427a68"
+			"Comment": "v0.6.0-rc1-5-g081b916",
+			"Rev": "081b9165cac9529a3ec03f793cd8ca438ee3b8b5"
 		},
 		{
 			"ImportPath": "github.com/hashicorp/go-cleanhttp",
@@ -48,12 +55,40 @@
 		},
 		{
 			"ImportPath": "github.com/hashicorp/serf/coordinate",
-			"Comment": "v0.6.4-144-ge53c5ef",
-			"Rev": "e53c5ef9c9b74fdb39baf2906a0fb9d7635bde46"
+			"Comment": "v0.6.4-145-ga72c045",
+			"Rev": "a72c0453da2ba628a013e98bf323a76be4aa1443"
+		},
+		{
+			"ImportPath": "github.com/pmezard/go-difflib/difflib",
+			"Rev": "d8ed2627bdf02c080bf22230dbb337003b7aba2d"
 		},
 		{
 			"ImportPath": "github.com/samuel/go-zookeeper/zk",
 			"Rev": "218e9c81c0dd8b3b18172b2bbfad92cc7d6db55f"
+		},
+		{
+			"ImportPath": "github.com/stretchr/objx",
+			"Rev": "1a9d0bb9f541897e62256577b352fdbc1fb4fd94"
+		},
+		{
+			"ImportPath": "github.com/stretchr/testify/assert",
+			"Comment": "v1.0-79-ge7a1d88",
+			"Rev": "e7a1d8890c7638d7bb50e3e498de4a1e913a28cf"
+		},
+		{
+			"ImportPath": "github.com/stretchr/testify/mock",
+			"Comment": "v1.0-79-ge7a1d88",
+			"Rev": "e7a1d8890c7638d7bb50e3e498de4a1e913a28cf"
+		},
+		{
+			"ImportPath": "github.com/stretchr/testify/require",
+			"Comment": "v1.0-79-ge7a1d88",
+			"Rev": "e7a1d8890c7638d7bb50e3e498de4a1e913a28cf"
+		},
+		{
+			"ImportPath": "github.com/stretchr/testify/suite",
+			"Comment": "v1.0-79-ge7a1d88",
+			"Rev": "e7a1d8890c7638d7bb50e3e498de4a1e913a28cf"
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/ssh/terminal",
@@ -61,7 +96,7 @@
 		},
 		{
 			"ImportPath": "golang.org/x/net/context",
-			"Rev": "b4e17d61b15679caf2335da776c614169a1b4643"
+			"Rev": "042ba42fa6633b34205efc66ba5719cd3afd8d38"
 		}
 	]
 }
