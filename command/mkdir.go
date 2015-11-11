@@ -2,10 +2,10 @@ package command
 
 import (
 	"fmt"
-	"github.com/codegangsta/cli"
-	"github.com/docker/libkv/store"
 	"github.com/JeffChien/kvctl/lib/storage"
 	"github.com/JeffChien/kvctl/util"
+	"github.com/codegangsta/cli"
+	"github.com/docker/libkv/store"
 	"path/filepath"
 	"time"
 )
@@ -59,8 +59,11 @@ func (m *MkdirCommand) mkdir(kv store.Store, path string, opt *mkdirOption) erro
 			}
 		}
 	}
-	if parentExit, _ := kv.Exists(util.NormalizeDir(filepath.Dir(normalizePath))); !parentExit {
-		return store.ErrKeyNotFound
+	parentDir := util.NormalizeDir(filepath.Dir(normalizePath))
+	if parentDir != "./" {
+		if parentExit, _ := kv.Exists(parentDir); !parentExit {
+			return store.ErrKeyNotFound
+		}
 	}
 	return kv.Put(util.NormalizeDir(normalizePath), nil, &store.WriteOptions{
 		IsDir: true,
