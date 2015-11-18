@@ -17,7 +17,7 @@ type mkdirOption struct {
 }
 
 func (m *MkdirCommand) run(c *cli.Context) {
-	kv, err := storage.NewBackend(c.GlobalString("backend"))
+	kv, err := storage.New(c.GlobalString("backend"))
 	if err != nil {
 		fmt.Println(err)
 		return

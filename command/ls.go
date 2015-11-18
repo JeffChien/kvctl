@@ -2,9 +2,9 @@ package command
 
 import (
 	"fmt"
+	"github.com/JeffChien/kvctl/lib/storage"
 	"github.com/codegangsta/cli"
 	"github.com/docker/libkv/store"
-	"github.com/JeffChien/kvctl/lib/storage"
 	"sort"
 )
 
@@ -12,7 +12,7 @@ type LsCommand cli.Command
 
 func (m *LsCommand) run(c *cli.Context) {
 	var paths []string = []string(c.Args())
-	kv, err := storage.NewBackend(c.GlobalString("backend"))
+	kv, err := storage.New(c.GlobalString("backend"))
 	if err != nil {
 		fmt.Println(err)
 		return

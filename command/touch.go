@@ -2,9 +2,9 @@ package command
 
 import (
 	"fmt"
+	"github.com/JeffChien/kvctl/lib/storage"
 	"github.com/codegangsta/cli"
 	"github.com/docker/libkv/store"
-	"github.com/JeffChien/kvctl/lib/storage"
 	"golang.org/x/crypto/ssh/terminal"
 	"io/ioutil"
 	"os"
@@ -15,7 +15,7 @@ type TouchCommand cli.Command
 
 func (m *TouchCommand) run(c *cli.Context) {
 	var data []byte
-	kv, err := storage.NewBackend(c.GlobalString("backend"))
+	kv, err := storage.New(c.GlobalString("backend"))
 	if err != nil {
 		fmt.Println(err)
 		return

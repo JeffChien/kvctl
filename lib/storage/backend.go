@@ -1,43 +1,37 @@
 package storage
 
 import (
-	"github.com/docker/libkv"
+	boltdbStorage "github.com/JeffChien/kvctl/lib/storage/boltdb"
+	consulStorage "github.com/JeffChien/kvctl/lib/storage/consul"
+	etcdStorage "github.com/JeffChien/kvctl/lib/storage/etcd"
+	zookeeperStorage "github.com/JeffChien/kvctl/lib/storage/zookeeper"
 	"github.com/docker/libkv/store"
-	"github.com/docker/libkv/store/boltdb"
-	"github.com/docker/libkv/store/consul"
-	"github.com/docker/libkv/store/etcd"
-	"github.com/docker/libkv/store/zookeeper"
 	"net/url"
 	"time"
 )
 
-func NewBackend(backend string) (store.Store, error) {
+func New(backend string) (store.Store, error) {
 	var storage store.Backend
+	var factory func(hosts []string, config *store.Config) (store.Store, error)
 	u, err := url.Parse(backend)
 	if err != nil {
 		return nil, err
 	}
 
 	storage = store.Backend(u.Scheme)
-
 	switch storage {
 	case store.CONSUL:
-		consul.Register()
+		factory = consulStorage.New
 	case store.ETCD:
-		etcd.Register()
+		factory = etcdStorage.New
 	case store.ZK:
-		zookeeper.Register()
+		factory = zookeeperStorage.New
 	case store.BOLTDB:
-		boltdb.Register()
+		factory = boltdbStorage.New
 	default:
 		storage = "unknow"
 	}
-
-	return libkv.NewStore(
-		storage,
-		[]string{u.Host},
-		&store.Config{
-			ConnectionTimeout: 10 * time.Second,
-		},
-	)
+	return factory([]string{u.Host}, &store.Config{
+		ConnectionTimeout: 10 * time.Second,
+	})
 }

@@ -3,15 +3,15 @@ package command
 import (
 	"errors"
 	"fmt"
+	"github.com/JeffChien/kvctl/lib/storage"
 	"github.com/codegangsta/cli"
 	"github.com/docker/libkv/store"
-	"github.com/JeffChien/kvctl/lib/storage"
 )
 
 type CatCommand cli.Command
 
 func (m *CatCommand) run(c *cli.Context) {
-	kv, err := storage.NewBackend(c.GlobalString("backend"))
+	kv, err := storage.New(c.GlobalString("backend"))
 	if err != nil {
 		fmt.Println(err)
 		return

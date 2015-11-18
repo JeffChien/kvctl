@@ -17,7 +17,7 @@ func (m *BackendSuite) TestInitialize() {
 	if url = os.Getenv("KVCTL_BACKEND"); url == "" {
 		url = "consul://127.0.0.1:8500"
 	}
-	kv, err := NewBackend(url)
+	kv, err := New(url)
 	assert.NotNil(m.T(), kv)
 	assert.NoError(m.T(), err)
 }

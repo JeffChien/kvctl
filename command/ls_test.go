@@ -20,7 +20,7 @@ func (m *LsSuite) SetupSuite() {
 	if url = os.Getenv("KVCTL_BACKEND"); url == "" {
 		url = "consul://127.0.0.1:8500"
 	}
-	m.kv, err = storage.NewBackend(url)
+	m.kv, err = storage.New(url)
 	assert.NoError(m.T(), err)
 }
 

@@ -10,7 +10,7 @@ import (
 type RmCommand cli.Command
 
 func (m *RmCommand) run(c *cli.Context) {
-	kv, err := storage.NewBackend(c.GlobalString("backend"))
+	kv, err := storage.New(c.GlobalString("backend"))
 	if err != nil {
 		fmt.Println(err)
 		return

@@ -1,8 +1,8 @@
 package command
 
 import (
-	"github.com/docker/libkv/store"
 	"github.com/JeffChien/kvctl/lib/storage"
+	"github.com/docker/libkv/store"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"os"
@@ -20,7 +20,7 @@ func (m *TouchSuite) SetupSuite() {
 	if url = os.Getenv("KVCTL_BACKEND"); url == "" {
 		url = "consul://127.0.0.1:8500"
 	}
-	m.kv, err = storage.NewBackend(url)
+	m.kv, err = storage.New(url)
 	assert.NoError(m.T(), err)
 }
 
