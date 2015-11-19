@@ -1,11 +1,11 @@
 package command
 
 import (
-	"errors"
 	"fmt"
+
+	"github.com/JeffChien/kvctl/lib"
 	"github.com/JeffChien/kvctl/lib/storage"
 	"github.com/codegangsta/cli"
-	"github.com/docker/libkv/store"
 )
 
 type CatCommand cli.Command
@@ -20,19 +20,17 @@ func (m *CatCommand) run(c *cli.Context) {
 		fmt.Println(fmt.Errorf("at leat one path"))
 		return
 	}
+	cmd, ok := kv.(lib.Command)
+	if !ok {
+		fmt.Println("not a command")
+		return
+	}
 	for _, v := range c.Args() {
-		pair, err := m.cat(kv, v)
+		pair, err := cmd.Cat(v)
 		if err != nil {
-			fmt.Println(PrefixError(v, err))
+			fmt.Println(lib.PrefixError(v, err))
 			continue
 		}
 		fmt.Println(string(pair.Value))
 	}
-}
-
-func (m *CatCommand) cat(kv store.Store, path string) (*store.KVPair, error) {
-	if path[len(path)-1] == '/' {
-		return nil, errors.New("Is a directory")
-	}
-	return kv.Get(path)
 }
