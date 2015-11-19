@@ -1,13 +1,14 @@
 package zookeeper
 
 import (
+	"github.com/JeffChien/kvctl/lib/storage/general"
 	"github.com/docker/libkv"
 	"github.com/docker/libkv/store"
 	"github.com/docker/libkv/store/zookeeper"
 )
 
 type ZookeeperStorage struct {
-	store.Store
+	*general.GeneralStorage
 }
 
 func New(hosts []string, config *store.Config) (store.Store, error) {
@@ -22,6 +23,6 @@ func New(hosts []string, config *store.Config) (store.Store, error) {
 		return nil, err
 	}
 	return &ZookeeperStorage{
-		Store: s,
+		GeneralStorage: general.New(s),
 	}, nil
 }

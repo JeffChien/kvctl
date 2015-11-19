@@ -1,7 +1,12 @@
-package command
+package lib
 
 import (
+	"errors"
 	"fmt"
+)
+
+var (
+	ErrNotSupport = errors.New("command not support")
 )
 
 func PrefixError(prefix string, err error) string {
