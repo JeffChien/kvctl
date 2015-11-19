@@ -2,10 +2,12 @@ package command
 
 import (
 	"fmt"
+	"sort"
+
+	"github.com/JeffChien/kvctl/lib"
 	"github.com/JeffChien/kvctl/lib/storage"
 	"github.com/codegangsta/cli"
 	"github.com/docker/libkv/store"
-	"sort"
 )
 
 type LsCommand cli.Command
@@ -20,26 +22,22 @@ func (m *LsCommand) run(c *cli.Context) {
 	if !c.Args().Present() {
 		paths = append(paths, "")
 	}
+	cmd, ok := kv.(lib.Command)
+	if !ok {
+		fmt.Println("not a command")
+		return
+	}
 	for _, v := range paths {
-		pairs, err := m.ls(kv, v)
+		pairs, err := cmd.Ls(v)
 		if err != nil && v != "" {
-			fmt.Println(PrefixError(v, err))
+			fmt.Println(lib.PrefixError(v, err))
 			continue
 		}
+		sort.Sort(byDictionary(pairs))
 		for _, vv := range pairs {
 			fmt.Println(vv.Key)
 		}
 	}
-}
-
-func (m *LsCommand) ls(kv store.Store, path string) ([]*store.KVPair, error) {
-	var err error
-	pairs, err := kv.List(path)
-	if err != nil {
-		return nil, err
-	}
-	sort.Sort(byDictionary(pairs))
-	return pairs, nil
 }
 
 type byDictionary []*store.KVPair
