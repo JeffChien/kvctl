@@ -1,8 +1,10 @@
 package command
 
 import (
-	"github.com/docker/libkv/store"
+	"github.com/JeffChien/kvctl/lib"
 	"github.com/JeffChien/kvctl/lib/storage"
+	"github.com/JeffChien/kvctl/lib/storage/etcd"
+	"github.com/docker/libkv/store"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"os"
@@ -14,38 +16,28 @@ type MkdirSuite struct {
 	kv store.Store
 }
 
-func (m *MkdirSuite) SetupSuite() {
-	var err error
-	var url string
-	if url = os.Getenv("KVCTL_BACKEND"); url == "" {
-		url = "consul://127.0.0.1:8500"
-	}
-	m.kv, err = storage.NewBackend(url)
-	assert.NoError(m.T(), err)
-}
-
 func (m *MkdirSuite) SetupTest() {
 	var err error
-	err = m.kv.Put("testroot/", nil, &store.WriteOptions{IsDir: true})
+	err = m.kv.Put("testroot", nil, &store.WriteOptions{IsDir: true})
 	assert.NoError(m.T(), err)
 }
 
 func (m *MkdirSuite) TearDownTest() {
 	var err error
-	err = m.kv.DeleteTree("testroot/")
+	err = m.kv.DeleteTree("testroot")
 	assert.NoError(m.T(), err)
 }
 
 func (m *MkdirSuite) TestNewDirectory() {
 	var err error
-	mkdir := MkdirCommand{}
-	err = mkdir.mkdir(m.kv, "testroot/a", nil)
+	cmd, _ := m.kv.(lib.Command)
+	err = cmd.Mkdir("testroot/a", nil)
 	assert.NoError(m.T(), err)
-	err = mkdir.mkdir(m.kv, "testroot/b/c", &mkdirOption{Parent: true})
+	err = cmd.Mkdir("testroot/b/c", &lib.MkdirOption{Parent: true})
 	assert.NoError(m.T(), err)
-	err = mkdir.mkdir(m.kv, "testroot/d/", nil)
+	err = cmd.Mkdir("testroot/d", nil)
 	assert.NoError(m.T(), err)
-	for _, v := range []string{"testroot/", "testroot/a/", "testroot/b/", "testroot/b/c/", "testroot/d/"} {
+	for _, v := range []string{"testroot", "testroot/a", "testroot/b", "testroot/b/c", "testroot/d"} {
 		exists, err := m.kv.Exists(v)
 		assert.True(m.T(), exists, v)
 		assert.NoError(m.T(), err)
@@ -53,6 +45,16 @@ func (m *MkdirSuite) TestNewDirectory() {
 }
 
 func TestRunMkdirSuite(t *testing.T) {
+	var err error
+	var url string
+	if url = os.Getenv("KVCTL_BACKEND"); url == "" {
+		url = "etcd://127.0.0.1:4001"
+	}
 	s := new(MkdirSuite)
+	s.kv, err = storage.New(url)
+	assert.NoError(t, err)
+	if _, ok := s.kv.(*etcd.EtcdStorage); !ok {
+		t.SkipNow()
+	}
 	suite.Run(t, s)
 }
