@@ -2,9 +2,10 @@ package command
 
 import (
 	"fmt"
+
+	"github.com/JeffChien/kvctl/lib"
 	"github.com/JeffChien/kvctl/lib/storage"
 	"github.com/codegangsta/cli"
-	"github.com/docker/libkv/store"
 )
 
 type RmCommand cli.Command
@@ -21,23 +22,15 @@ func (m *RmCommand) run(c *cli.Context) {
 	} else {
 		paths = append(paths, c.Args()...)
 	}
+	cmd, ok := kv.(lib.Command)
+	if !ok {
+		fmt.Println("not a command")
+		return
+	}
 	for _, v := range paths {
-		err = m.rm(kv, v, c.Bool("recursive"))
+		err = cmd.Rm(v, c.Bool("recursive"))
 		if err != nil {
-			fmt.Println(PrefixError(v, err))
+			fmt.Println(lib.PrefixError(v, err))
 		}
 	}
-}
-
-func (m *RmCommand) rm(kv store.Store, path string, recursive bool) error {
-	var err error
-	if path == "" || path[len(path)-1] == '/' {
-		if !recursive {
-			return fmt.Errorf("Is a directory")
-		}
-		err = kv.DeleteTree(path)
-	} else {
-		err = kv.Delete(path)
-	}
-	return err
 }

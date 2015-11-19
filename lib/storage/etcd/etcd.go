@@ -8,6 +8,7 @@ import (
 	"github.com/docker/libkv/store"
 	"github.com/docker/libkv/store/etcd"
 	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -66,4 +67,31 @@ func (m *EtcdStorage) Mkdir(path string, opt *lib.MkdirOption) error {
 		IsDir: true,
 		TTL:   ttl,
 	})
+}
+
+func (m *EtcdStorage) Rm(path string, recursive bool) error {
+	var err error
+	if path == "" && recursive {
+		kvList, err := m.List(path)
+		if err != nil {
+			return err
+		}
+		set := make(map[string]bool)
+		for _, p := range kvList {
+			pos := strings.IndexRune(p.Key, '/')
+			if pos != -1 {
+				set[p.Key[:pos]] = true
+			} else {
+				set[p.Key] = true
+			}
+		}
+		for k, _ := range set {
+			if err = m.DeleteTree(k); err != nil {
+				return err
+			}
+		}
+	} else {
+		err = m.GeneralStorage.Rm(path, recursive)
+	}
+	return err
 }
