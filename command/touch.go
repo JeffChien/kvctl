@@ -2,13 +2,13 @@ package command
 
 import (
 	"fmt"
-	"github.com/JeffChien/kvctl/lib/storage"
-	"github.com/codegangsta/cli"
-	"github.com/docker/libkv/store"
-	"golang.org/x/crypto/ssh/terminal"
 	"io/ioutil"
 	"os"
-	"path/filepath"
+
+	"github.com/JeffChien/kvctl/lib"
+	"github.com/JeffChien/kvctl/lib/storage"
+	"github.com/codegangsta/cli"
+	"golang.org/x/crypto/ssh/terminal"
 )
 
 type TouchCommand cli.Command
@@ -37,30 +37,17 @@ func (m *TouchCommand) run(c *cli.Context) {
 		}
 	}
 
+	cmd, ok := kv.(lib.Command)
+	if !ok {
+		fmt.Println("not a command")
+		return
+	}
+
 	for _, v := range c.Args() {
-		err := m.touch(kv, v, data, nil)
+		err := cmd.Touch(v, data, nil)
 		if err != nil {
-			fmt.Println(PrefixError(v, err))
+			fmt.Println(lib.PrefixError(v, err))
 			continue
 		}
 	}
-}
-
-func (m *TouchCommand) touch(kv store.Store, path string, data []byte, opts *store.WriteOptions) error {
-	if path[len(path)-1] == '/' {
-		return fmt.Errorf("got a directory")
-	}
-	normalizePath := filepath.Clean(path)
-	parentDir := filepath.Dir(normalizePath)
-	if !(parentDir == "." || parentDir == "/") {
-		//check parent dir existk
-		exists, err := kv.Exists(fmt.Sprintf("%s/", parentDir))
-		if err != nil {
-			return err
-		}
-		if !exists {
-			return store.ErrKeyNotFound
-		}
-	}
-	return kv.Put(normalizePath, data, opts)
 }
