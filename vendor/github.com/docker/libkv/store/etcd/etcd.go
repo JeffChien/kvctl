@@ -407,7 +407,7 @@ func (s *Etcd) List(directory string) ([]*store.KVPair, error) {
 		kv := []*store.KVPair{}
 		if node != resp.Node {
 			kv = append(kv, &store.KVPair{
-				Key:       node.Key,
+				Key:       strings.TrimPrefix(node.Key, "/"),
 				Value:     []byte(node.Value),
 				LastIndex: node.ModifiedIndex,
 			})

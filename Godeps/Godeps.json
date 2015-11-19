@@ -1,8 +1,17 @@
 {
 	"ImportPath": "github.com/JeffChien/kvctl",
-	"GoVersion": "go1.5.1",
+	"GoVersion": "go1.5",
 	"Packages": [
-		"./..."
+		"github.com/JeffChien/kvctl",
+		"github.com/JeffChien/kvctl/command",
+		"github.com/JeffChien/kvctl/lib",
+		"github.com/JeffChien/kvctl/lib/storage",
+		"github.com/JeffChien/kvctl/lib/storage/boltdb",
+		"github.com/JeffChien/kvctl/lib/storage/consul",
+		"github.com/JeffChien/kvctl/lib/storage/etcd",
+		"github.com/JeffChien/kvctl/lib/storage/general",
+		"github.com/JeffChien/kvctl/lib/storage/zookeeper",
+		"github.com/JeffChien/kvctl/util"
 	],
 	"Deps": [
 		{
@@ -67,16 +76,7 @@
 			"Rev": "218e9c81c0dd8b3b18172b2bbfad92cc7d6db55f"
 		},
 		{
-			"ImportPath": "github.com/stretchr/objx",
-			"Rev": "1a9d0bb9f541897e62256577b352fdbc1fb4fd94"
-		},
-		{
 			"ImportPath": "github.com/stretchr/testify/assert",
-			"Comment": "v1.0-79-ge7a1d88",
-			"Rev": "e7a1d8890c7638d7bb50e3e498de4a1e913a28cf"
-		},
-		{
-			"ImportPath": "github.com/stretchr/testify/mock",
 			"Comment": "v1.0-79-ge7a1d88",
 			"Rev": "e7a1d8890c7638d7bb50e3e498de4a1e913a28cf"
 		},
