@@ -10,6 +10,7 @@ import (
 func main() {
 	app := cli.NewApp()
 	app.Name = "kvctl"
+	app.Version = kvctl_version
 	app.Usage = "manage kv"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
