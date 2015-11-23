@@ -23,6 +23,6 @@ func New(hosts []string, config *store.Config) (store.Store, error) {
 		return nil, err
 	}
 	return &BoltdbStorage{
-		GeneralStorage: general.New(s),
+		GeneralStorage: general.New(s, string(store.BOLTDB)),
 	}, nil
 }

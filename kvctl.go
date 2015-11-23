@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/codegangsta/cli"
-	"github.com/JeffChien/kvctl/command"
 	"os"
+
+	"github.com/JeffChien/kvctl/command"
+	"github.com/codegangsta/cli"
 )
 
 func main() {
@@ -25,6 +26,7 @@ func main() {
 		cli.Command(command.Rm),
 		cli.Command(command.Mkdir),
 		cli.Command(command.Ls),
+		cli.Command(command.Tar),
 	}
 	app.Run(os.Args)
 }

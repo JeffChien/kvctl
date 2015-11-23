@@ -10,6 +10,7 @@ var (
 	Rm    RmCommand
 	Mkdir MkdirCommand
 	Ls    LsCommand
+	Tar   TarCommand
 )
 
 func init() {
@@ -49,5 +50,25 @@ func init() {
 		Name:   "ls",
 		Usage:  "recursive list item in given path",
 		Action: Ls.run,
+	}
+	Tar = TarCommand{
+		Name:  "tar",
+		Usage: "archive/extract kv data",
+		Flags: []cli.Flag{
+			cli.BoolFlag{
+				Name:  "extract,x",
+				Usage: "extract from archive file",
+			},
+			cli.BoolFlag{
+				Name:  "create,c",
+				Usage: "create an archive file",
+			},
+			cli.StringFlag{
+				Name:  "file,f",
+				Value: "-",
+				Usage: "archive file, '-' for stdin/stdout",
+			},
+		},
+		Action: Tar.run,
 	}
 }

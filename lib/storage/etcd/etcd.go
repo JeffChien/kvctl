@@ -1,15 +1,16 @@
 package etcd
 
 import (
+	"path/filepath"
+	"strings"
+	"time"
+
 	"github.com/JeffChien/kvctl/lib"
 	"github.com/JeffChien/kvctl/lib/storage/general"
 	"github.com/JeffChien/kvctl/util"
 	"github.com/docker/libkv"
 	"github.com/docker/libkv/store"
 	"github.com/docker/libkv/store/etcd"
-	"path/filepath"
-	"strings"
-	"time"
 )
 
 type EtcdStorage struct {
@@ -28,7 +29,7 @@ func New(hosts []string, config *store.Config) (store.Store, error) {
 		return nil, err
 	}
 	return &EtcdStorage{
-		GeneralStorage: general.New(s),
+		GeneralStorage: general.New(s, string(store.ETCD)),
 	}, nil
 }
 
