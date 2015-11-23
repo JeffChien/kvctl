@@ -107,6 +107,7 @@ type KVPair struct {
 	Key       string
 	Value     []byte
 	LastIndex uint64
+	Dir       bool
 }
 
 // WriteOptions contains optional request parameters

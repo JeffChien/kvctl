@@ -15,6 +15,11 @@
 	],
 	"Deps": [
 		{
+			"ImportPath": "github.com/blang/semver",
+			"Comment": "v3.0.1",
+			"Rev": "31b736133b98f26d5e078ec9eb591666edfd091f"
+		},
+		{
 			"ImportPath": "github.com/boltdb/bolt",
 			"Comment": "v1.1.0-17-gd359c78",
 			"Rev": "d359c78f40cc01fa12b65c3d30210dc9c529dd87"

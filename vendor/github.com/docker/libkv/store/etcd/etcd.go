@@ -410,6 +410,7 @@ func (s *Etcd) List(directory string) ([]*store.KVPair, error) {
 				Key:       strings.TrimPrefix(node.Key, "/"),
 				Value:     []byte(node.Value),
 				LastIndex: node.ModifiedIndex,
+				Dir:       node.Dir,
 			})
 		}
 		for _, v := range node.Nodes {
