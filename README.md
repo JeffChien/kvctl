@@ -8,6 +8,7 @@
 - touch
 - rm
 - ls
+- tar (not compatible with each backend)
 - ... more
 
 # support backend
@@ -26,7 +27,6 @@ currently only test with `consul`, `etcd`
   will migrate to upstream when some issues are solved.
 
 # Roadmap
-- `tar`: dump/restore
 - `cp`: copy from a to b
 - `repl`: interactive mode
 - `watch`: watch change under some path and return changed key
