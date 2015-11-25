@@ -249,7 +249,13 @@ func (s *Zookeeper) List(directory string) ([]*store.KVPair, error) {
 	if stat.NumChildren > 0 {
 		sort.Sort(sort.StringSlice(children))
 		for _, child := range children {
-			pair, err := s.Get(strings.TrimSuffix(directory, "/") + s.normalize(child))
+			var key string
+			if directory == "" {
+				key = child
+			} else {
+				key = strings.TrimSuffix(directory, "/") + s.normalize(child)
+			}
+			pair, err := s.Get(key)
 			if err != nil {
 				return nil, err
 			}
@@ -259,7 +265,7 @@ func (s *Zookeeper) List(directory string) ([]*store.KVPair, error) {
 				LastIndex: uint64(stat.Version),
 			})
 			//recursive over each child
-			subChildres, err := s.List(strings.TrimSuffix(directory, "/") + s.normalize(child))
+			subChildres, err := s.List(key)
 			if err != nil {
 				return nil, err
 			}
@@ -280,6 +286,9 @@ func (s *Zookeeper) DeleteTree(directory string) error {
 
 	sort.Sort(sort.Reverse(store.KVPareSlice(pairs)))
 	for _, pair := range pairs {
+		if strings.HasPrefix(pair.Key, "zookeeper") {
+			continue
+		}
 		reqs = append(reqs, &zk.DeleteRequest{
 			Path:    s.normalize(pair.Key),
 			Version: -1,
