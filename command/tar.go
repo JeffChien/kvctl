@@ -18,6 +18,7 @@ func (m *TarCommand) run(c *cli.Context) {
 	var data []byte
 	var err error
 	var fname string
+	var path string
 	kv, err := storage.New(c.GlobalString("backend"))
 	if err != nil {
 		fmt.Println(err)
@@ -35,11 +36,10 @@ func (m *TarCommand) run(c *cli.Context) {
 	//mutual flag
 	if c.Bool("create") != c.Bool("extract") {
 		if c.Bool("create") {
-			if len(c.Args()) != 1 {
-				fmt.Println(fmt.Errorf("need a path"))
-				return
+			if len(c.Args()) == 1 {
+				path = c.Args()[0]
 			}
-			tarData, err := cmd.Dump(c.Args()[0])
+			tarData, err := cmd.Dump(path)
 			if err != nil {
 				fmt.Println(err)
 				return
